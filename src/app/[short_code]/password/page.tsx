@@ -49,7 +49,7 @@ function PasswordPage() {
                 })
 
 
-        } catch (error) {
+        } catch {
             setIsLoading(false)
 
             setIsToast(true)

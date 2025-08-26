@@ -44,14 +44,20 @@ export default function HistoryPopup() {
         const originalSetItem = ls.setItem.bind(ls);
         const originalRemoveItem = ls.removeItem.bind(ls);
 
-        (window.localStorage as any).setItem = (key: string, value: string) => {
+        // Create enhanced localStorage interface
+        interface EnhancedStorage extends Storage {
+            setItem(key: string, value: string): void;
+            removeItem(key: string): void;
+        }
+
+        (window.localStorage as EnhancedStorage).setItem = (key: string, value: string) => {
             originalSetItem(key, value);
             window.dispatchEvent(
                 new CustomEvent("local-storage", { detail: { key, newValue: value } })
             );
         };
 
-        (window.localStorage as any).removeItem = (key: string) => {
+        (window.localStorage as EnhancedStorage).removeItem = (key: string) => {
             originalRemoveItem(key);
             window.dispatchEvent(new CustomEvent("local-storage", { detail: { key, newValue: null } }));
         };
@@ -62,8 +68,8 @@ export default function HistoryPopup() {
 
         return () => {
             // restore original functions and listeners
-            (window.localStorage as any).setItem = originalSetItem;
-            (window.localStorage as any).removeItem = originalRemoveItem;
+            (window.localStorage as EnhancedStorage).setItem = originalSetItem;
+            (window.localStorage as EnhancedStorage).removeItem = originalRemoveItem;
             window.removeEventListener("storage", handleStorageChange);
             window.removeEventListener("local-storage", handleStorageChange as EventListener);
         };

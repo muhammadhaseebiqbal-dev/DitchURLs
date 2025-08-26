@@ -180,7 +180,7 @@ export default function PAGE() {
           }
       })
 
-    } catch (error) {
+    } catch {
       setIsToast(true)
       setIsLoading(false)
 
