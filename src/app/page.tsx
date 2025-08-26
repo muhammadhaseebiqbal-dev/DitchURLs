@@ -279,7 +279,7 @@ export default function PAGE() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ type: 'tween', duration: 0.5, delay: 0.5 }}
-            className="rounded-lg overflow-hidden lg:w-[54%] h-fit w-fit "
+            className="rounded-lg overflow-hidden lg:w-fit h-fit w-fit"
             >
             <Qr
               ref={downloadQRElem}
