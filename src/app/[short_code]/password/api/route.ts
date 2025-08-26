@@ -1,9 +1,6 @@
 import { NextRequest, NextResponse } from "next/server"
 import sql from "@/app/api/db/db"
-import { redirect } from "next/navigation"
 import isURLValid from "@/app/api/utils/urlvalidator"
-
-
 
 export async function POST(
     req: NextRequest,

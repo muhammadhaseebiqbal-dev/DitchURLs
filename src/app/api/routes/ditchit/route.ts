@@ -4,7 +4,7 @@ import calculate_expiry from "../../utils/expiry";
 import { NextResponse, NextRequest } from "next/server";
 
 
-export async function POST(req: NextRequest, res: NextResponse) {
+export async function POST(req: NextRequest) {
     const body = await req.json()
 
     if (!body.actual_url) {
@@ -21,7 +21,7 @@ export async function POST(req: NextRequest, res: NextResponse) {
     console.log("ex i: ", expire_at ? new Date(expire_at).toUTCString() : "No expiry date")
 
      try {
-        let result = await sql`SELECT expire_at FROM links WHERE short_code = ${short_code}`
+        const result = await sql`SELECT expire_at FROM links WHERE short_code = ${short_code}`
         
         if (result.length > 0)
         {

@@ -2,7 +2,6 @@
 import React, { useState } from 'react';
 import { Spotlight } from "@/components/ui/spotlight";
 import { cn } from "@/lib/utils";
-import { Lato } from "next/font/google";
 import '@/app/globals.css'
 import WrapButton from '@/components/ui/wrap-button';
 import { AlertTriangle, Globe } from 'lucide-react';
@@ -16,7 +15,7 @@ function PasswordPage() {
     const [password, setPassword] = useState<string>("")
     const params = useParams();
     const short_code = params?.short_code as string;
-    const [isToast, setIsToast] = useState<Boolean>(false)
+    const [isToast, setIsToast] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
     const [toastVariant, setToastVariant] = useState<string>('')
     const [toastMessage, setToastMessage] = useState<string>('')

@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { cn } from "@/lib/utils";
 import { Spotlight } from "@/components/ui/spotlight";
 import WrapButton from "@/components/ui/wrap-button"
@@ -31,7 +31,7 @@ export default function PAGE() {
   const [expiry, setExpiry] = useState<string>('')
   const [alias, setAlias] = useState<string>('')
   const [directLink, setDirectLink] = useState<string>('')
-  const [isPopup, setIsPopup] = useState<Boolean>(false)
+  const [isPopup, setIsPopup] = useState<boolean>(false)
   const downloadQRElem = useRef<HTMLCanvasElement | null>(null)
 
 

@@ -1,14 +1,7 @@
 import React from 'react';
 import { Spotlight } from "@/components/ui/spotlight";
 import { cn } from "@/lib/utils";
-import { Lato } from "next/font/google";
 import { AlertOctagon } from 'lucide-react';
-
-const lato = Lato({
-    variable: "--font-lato",
-    subsets: ["latin"],
-    weight: ["400", "700"],
-});
 
 
 function NotFound() {

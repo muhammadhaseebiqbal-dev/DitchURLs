@@ -1,6 +1,6 @@
 import sql from "../db/db";
 
-export async function POST(_req: Request) {
+export async function POST() {
   try {
     await sql`SELECT 1`;
     console.log("Database connected successfully (POST /api/routes)");
