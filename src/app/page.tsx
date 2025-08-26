@@ -12,6 +12,7 @@ import '@/app/globals.css'
 import { Qr } from "@qrgrid/react/canvas";
 import { dotModuleStyle } from "@qrgrid/styles/canvas/styles";
 import { downloadQr } from "@qrgrid/styles/canvas";
+import HistoryPopup from "@/components/ui/history-popup";
 
 const lato = Lato({
   variable: "--font-lato",
@@ -19,6 +20,10 @@ const lato = Lato({
   weight: ["400", "700"],
 });
 
+
+type HistoryItem = {
+  url: string;
+};
 
 export default function PAGE() {
 
@@ -135,9 +140,18 @@ export default function PAGE() {
         setPassword('');
         setExpiry('');
         setAlias('');
-        console.log(response.data)
 
         if (response.data.success) {
+        const key = "historyItems";
+        const newLink = `${process.env.NEXT_PUBLIC_APP_URL}/${response.data.short_code}`;
+
+        const raw = window.localStorage.getItem(key);
+        const list = raw ? JSON.parse(raw) as HistoryItem[] : [];
+        if (!list.some(item => item.url === newLink)) {
+          list.unshift({url: newLink});  
+          list.splice(4);
+          window.localStorage.setItem(key, JSON.stringify(list));
+        }
         setDirectLink(`${process.env.NEXT_PUBLIC_APP_URL}/${response.data.short_code}`);
         setIsPopup(true)
             setIsToast(true)
@@ -317,9 +331,10 @@ export default function PAGE() {
         </motion.div>}
       </AnimatePresence>
 
-
+         <div className="pointer-events-auto z-20">
+            <HistoryPopup />
+          </div>
       <div>
-
       </div>
     </div>
   )
