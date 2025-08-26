@@ -4,11 +4,12 @@ import isURLValid from "@/app/api/utils/urlvalidator"
 
 export async function POST(
     req: NextRequest,
-    { params }: {params: {short_code: string}}
-){
-    const { short_code } = await  params;
+    context: { params: Promise<{ short_code: string }> }
+) {
+    const { params } =  context;
     const body = await req.json();
     const password = String(body?.password || "");
+    const { short_code } = await params;
 
     console.log(password);
     console.log(short_code);
